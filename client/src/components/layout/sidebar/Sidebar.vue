@@ -1,10 +1,11 @@
 <template>
   <div id="mySidebar" class="sidebar">
-  <a href="#" class="closebtn" v-on:click = "$emit('closeSide')">&times;</a>
-  <a href="#">About</a>
-  <a href="#">Services</a>
-  <a href="#">Clients</a>
-  <a href="#">Contact</a>
+    <h1 class="logo">Izanami</h1>
+    <a href="#" class="closebtn" v-on:click = "$emit('closeSide')">&times;</a>
+    <a href="#">Create task</a>
+    <a href="#">All tasks</a>
+    <a href="#">Clients</a>
+    <a href="#">Contact</a>
 </div>
 </template>
 
@@ -26,7 +27,7 @@ export default {
     left: 0;
     background-color: #333; /* Black*/
     overflow-x: hidden; /* Disable horizontal scroll */
-    padding-top: 60px; /* Place content 60px from the top */
+    padding-top: 90px; /* Place content 60px from the top */
     a{
       padding: 8px 8px 8px 32px;
       text-decoration: none;
@@ -40,10 +41,18 @@ export default {
     }
     .closebtn{
       position: absolute;
-      top: 0;
+      top: 3px;
       right: 25px;
       font-size: 36px;
       margin-left: 50px;
+    }
+    .logo{
+      position: absolute;
+      top: 2px;
+      right: 110px;
+      font-size: 20px;
+      margin-left: 5px;
+      color: white;
     }
 }
 </style>

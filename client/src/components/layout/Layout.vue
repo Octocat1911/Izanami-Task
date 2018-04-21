@@ -1,6 +1,7 @@
 <template>
   <div>
     <Navbar v-on:openSide="setVisible()"></Navbar>
+    <Background></Background>
     <transition name="slide">
     <Sidebar v-on:closeSide="setVisible()" class="sidebar" v-if="visible"></Sidebar>
     </transition>
@@ -12,12 +13,14 @@
 <script>
 import Navbar from './navbar';
 import Sidebar from './sidebar';
+import Background from './background';
 
 export default {
   name: 'Layout',
   components: {
     Navbar,
     Sidebar,
+    Background,
   },
   data: () => ({
     visible: false,
