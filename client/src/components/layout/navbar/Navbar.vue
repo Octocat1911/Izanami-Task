@@ -13,15 +13,6 @@ export default {
   data: () => ({
     visible: false,
   }),
-  methods: {
-    openSide() {
-      if (this.visible) {
-        this.visible = false;
-      } else {
-        this.visible = true;
-      }
-    },
-  },
 };
 </script>
 
