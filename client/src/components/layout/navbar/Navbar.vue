@@ -2,7 +2,7 @@
   <div class="header">
     <span v-on:click = "$emit('openSide')">&#9776;</span>
     <div class="header-logo">
-      <h1>Izanami <a href="#/tasks">task</a></h1>
+      <h1>Izanami <a href="#/task">task</a></h1>
     </div>
   </div>
 </template>

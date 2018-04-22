@@ -2,10 +2,10 @@
   <div id="mySidebar" class="sidebar">
     <h1 class="logo">Izanami</h1>
     <a href="#" class="closebtn" v-on:click = "$emit('closeSide')">&times;</a>
-    <a href="#">Create task</a>
-    <a href="#">All tasks</a>
-    <a href="#">Clients</a>
-    <a href="#">Contact</a>
+    <a href="#" v-on:click = "$emit('closeSide')">Create task</a>
+    <a href="#/task" v-on:click = "$emit('closeSide')">All tasks</a>
+    <a href="#" v-on:click = "$emit('closeSide')">Clients</a>
+    <a href="#" v-on:click = "$emit('closeSide')">Contact</a>
 </div>
 </template>
 
