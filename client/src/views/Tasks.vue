@@ -17,5 +17,7 @@ export default {
   .task-list{
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
+    z-index: 2;
   }
 </style>

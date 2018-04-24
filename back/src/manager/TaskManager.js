@@ -66,7 +66,7 @@ class TaskManager{
     }
   }
 
-  deleteTask(id,task,callback){
+  deleteTask(id,callback){
     try {
       dbManager.getDbConnection(function (err, client) {
         if(err) throw err;

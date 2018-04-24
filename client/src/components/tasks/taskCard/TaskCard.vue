@@ -21,14 +21,25 @@
     </div>
     <footer class="card-footer">
       <a href="#" class="card-footer-item">Edit</a>
-      <a href="#" class="card-footer-item">Delete</a>
+      <a href="#" class="card-footer-item" v-on:click="deleteCard(task._id)">Delete</a>
     </footer>
   </div>
 </template>
 
 <script>
+import Service from '@/services';
+
 export default {
   name: 'TaskCard',
+  components: {
+    Service,
+  },
+  methods: {
+    deleteCard(id) {
+      Service.taskService.delete(id);
+      this.$emit('deleted', id);
+    },
+  },
   props: {
     task: {
       type: Object,

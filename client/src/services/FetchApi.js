@@ -31,6 +31,6 @@ export default class {
     const res = fetch(`${this.apiUrl}${this.endpoint}/${id}`, {
       method: 'delete',
     });
-    return res.json();
+    return res;
   }
 }

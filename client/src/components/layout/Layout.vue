@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Navbar v-on:openSide="setVisible()"></Navbar>
+    <Navbar v-on:openSide="setVisible()" class="navbar"></Navbar>
     <transition name="slide">
     <Sidebar v-on:closeSide="setVisible()" class="sidebar" v-if="visible"></Sidebar>
     </transition>

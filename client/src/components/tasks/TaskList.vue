@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div class="task-list">
     <task-card v-for="task in tasks"
     :task="task"
-    :key="task.id"></task-card>
+    :key="task.id" @deleted="deleteCard"></task-card>
   </div>
 </template>
 
@@ -18,6 +18,12 @@ export default {
   data: () => ({
     tasks: [],
   }),
+  methods: {
+    deleteCard(id) {
+      // eslint-disable-next-line
+      this.tasks.splice(this.tasks.findIndex(x => x._id === id), 1);
+    },
+  },
   async created() {
     this.tasks = await Service.taskService.get();
   },
@@ -25,5 +31,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 </style>

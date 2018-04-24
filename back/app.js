@@ -24,7 +24,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/api', indexRouter);
 app.use('/',function (req,res,next) {
   res.contentType("application/json; charset=utf-8");
-  res.send({"server":1.0});
+  res.send({"server":"1.0"});
 });
 
 // catch 404 and forward to error handler

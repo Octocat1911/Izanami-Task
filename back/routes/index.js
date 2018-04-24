@@ -8,6 +8,7 @@ const ObjectID = require('mongodb').ObjectID;
 
 
 router.use(bodyParser.json());       //JSON-encoded bodies
+router.use(cors());
 
 /* GET home page. */
 router.get('/task',cors(), function(req, res, next) {
@@ -57,9 +58,9 @@ router.put('/task/',cors(),function (req,res,next) {
   });
 });
 
-router.delete('/task/',cors(),function (req,res,next) {
-  let id = new ObjectID(req.body._id);
-   taskmanager.deleteTask(id,new Task(req.body.title,req.body.dateBegin,req.body.dateEnd,req.body.status,req.body.tags),function (result) {
+router.delete('/task/:id',cors(),function (req,res,next) {
+  let id = new ObjectID(req.params.id);
+   taskmanager.deleteTask(id,function (result) {
      res.status(201);
      res.send(result);
    });
