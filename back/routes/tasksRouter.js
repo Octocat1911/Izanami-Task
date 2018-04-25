@@ -41,17 +41,16 @@ router.get('/task/:id',cors(),function (req,res,next) {
   });
 });
 
-router.post('/task/',cors(),function (req,res,next) {
+router.post('/task',cors(),function (req,res,next) {
   taskmanager.addTask(new Task(req.body.title,req.body.dateBegin,req.body.dateEnd,req.body.status,req.body.tags),function (result) {
     res.status(201);
     res.send(result);
   });
 });
 
-router.put('/task/',cors(),function (req,res,next) {
-  let id = ObjectID(req.body._id);
+router.put('/task/:id',cors(),function (req,res,next) {
+  let id = ObjectID(req.params.id);
   let task = req.body;
-  delete task._id;
   taskmanager.modifyTask(id,task,function (result) {
     res.status(201);
     res.send(result);

@@ -5,7 +5,8 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
 
-const indexRouter = require('./routes/index');
+const tasksRouter = require('./routes/tasksRouter');
+const usersRouter = require('./routes/usersRouter');
 
 const app = express();
 
@@ -21,7 +22,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/api', indexRouter);
+app.use('/api', tasksRouter);
+app.use('/api', usersRouter);
+
 app.use('/',function (req,res,next) {
   res.contentType("application/json; charset=utf-8");
   res.send({"server":"1.0"});
