@@ -19,9 +19,9 @@ export default {
     tasks: [],
   }),
   methods: {
-    deleteCard(id) {
-      // eslint-disable-next-line
-      this.tasks.splice(this.tasks.findIndex(x => x._id === id), 1);
+    deleteTask(id) {
+      Service.taskService.delete(id);
+      this.tasks.splice(this.tasks.findIndex(x => x.id === id), 1);
     },
   },
   async created() {

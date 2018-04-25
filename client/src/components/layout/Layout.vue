@@ -12,14 +12,12 @@
 <script>
 import Navbar from './navbar';
 import Sidebar from './sidebar';
-import Background from './background';
 
 export default {
   name: 'Layout',
   components: {
     Navbar,
     Sidebar,
-    Background,
   },
   data: () => ({
     visible: false,

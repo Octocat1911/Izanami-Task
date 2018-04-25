@@ -42,7 +42,8 @@ router.get('/task/:id',cors(),function (req,res,next) {
 });
 
 router.post('/task',cors(),function (req,res,next) {
-  taskmanager.addTask(new Task(req.body.title,req.body.dateBegin,req.body.dateEnd,req.body.status,req.body.tags),function (result) {
+  let task = req.body;
+  taskmanager.addTask(task,function (result) {
     res.status(201);
     res.send(result);
   });

@@ -33,7 +33,7 @@ router.get('/user/:id',cors(),function (req, res) {
 });
 
 router.post('/user',cors(),function (req, res) {
-  usermanager.addUser(new User(req.body.firstname,req.body.lastname,req.body.tasks),function (result) {
+  usermanager.addUser(new User(req.body.firstname,req.body.lastname),function (result) {
     res.status(201);
     res.send(result);
   });
