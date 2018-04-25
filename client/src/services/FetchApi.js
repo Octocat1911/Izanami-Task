@@ -14,14 +14,20 @@ export default class {
   async add(resource) {
     const res = fetch(`${this.apiUrl}${this.endpoint}`, {
       method: 'post',
+      headers: {
+        'Content-Type': 'application/json',
+      },
       body: JSON.stringify(resource),
     });
-    return res.json();
+    return res;
   }
 
   async update(id, resource) {
     const res = fetch(`${this.apiUrl}${this.endpoint}/${id}`, {
       method: 'put',
+      headers: {
+        'Content-Type': 'application/json',
+      },
       body: JSON.stringify(resource),
     });
     return res.json();

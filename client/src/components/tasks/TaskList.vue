@@ -19,7 +19,7 @@ export default {
     tasks: [],
   }),
   methods: {
-    deleteTask(id) {
+    deleteCard(id) {
       Service.taskService.delete(id);
       this.tasks.splice(this.tasks.findIndex(x => x.id === id), 1);
     },

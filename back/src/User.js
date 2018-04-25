@@ -3,7 +3,7 @@ class User {
   constructor(firstname,lastname){
     this.firstname = firstname;
     this.lastname = lastname;
-    this.tasks = [];
+    this.tasks = [ "" ];
   }
 
 }

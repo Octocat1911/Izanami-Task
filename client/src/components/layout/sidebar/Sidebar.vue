@@ -3,7 +3,8 @@
     <h1 class="logo">Izanami</h1>
     <a href="#/" v-on:click = "$emit('closeSide')">Home</a>
     <a href="#" class="closebtn" v-on:click = "$emit('closeSide')">&times;</a>
-    <a href="#" v-on:click = "$emit('closeSide')">Create task</a>
+    <a href="#/taskcreation" v-on:click = "$emit('closeSide')">Create task</a>
+    <a href="#/usercreation" v-on:click = "$emit('closeSide')">Create user</a>
     <a href="#/task" v-on:click = "$emit('closeSide')">Tasks</a>
     <a href="#/user" v-on:click = "$emit('closeSide')">Users</a>
 </div>
