@@ -12,11 +12,13 @@
     </header>
     <div class="card-content">
       <div class="content">
-        <a href="#">#{{task.tags}}</a>
-        <br>
         <time datetime="2016-1-1">Begin : {{task.dateBegin}}</time>
         <br>
         <time datetime="2016-1-1">End : {{task.dateEnd}}</time>
+        <br>
+        <a href="#" v-for="tag in task.tags"
+        :tag="tag"
+        :key="tag">#{{tag}} </a>
       </div>
     </div>
     <footer class="card-footer">

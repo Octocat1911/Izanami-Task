@@ -37,7 +37,7 @@ export default {
 <style lang="scss" scoped>
   .user-creation{
     .title{
-      margin-top: 100px;
+      margin-top: 80px;
       text-align: center;
     }
     .form{
