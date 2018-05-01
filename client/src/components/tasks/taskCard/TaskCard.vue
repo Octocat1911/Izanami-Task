@@ -42,7 +42,7 @@ export default {
       this.$store.dispatch('deleteTask', id);
     },
     editTask(task) {
-      this.$store.dispatch('setCurrentTask', task);
+      this.$store.commit('setCurrentTask', task);
     },
   },
 };
