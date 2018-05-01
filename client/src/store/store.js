@@ -18,32 +18,34 @@ export default new Vuex.Store({
     },
   },
   mutations: {
-    async loadTasks(state) {
-      state.tasks = await Service.taskService.get();
+    loadTasks(state, tasks) {
+      state.tasks = tasks;
     },
-    async loadUsers(state) {
-      state.users = await Service.userService.get();
+    loadUsers(state, users) {
+      state.users = users;
     },
     deleteTask(state, id) {
-      Service.taskService.delete(id);
       state.tasks.splice(state.tasks.findIndex(x => x.id === id), 1);
     },
     deleteUser(state, id) {
-      Service.userService.delete(id);
       state.users.splice(state.users.findIndex(x => x.id === id), 1);
     },
   },
   actions: {
-    loadTasks(context) {
-      context.commit('loadTasks');
+    async loadTasks(context) {
+      const tasks = await Service.taskService.get();
+      context.commit('loadTasks', tasks);
     },
-    loadUsers(context) {
-      context.commit('loadUsers');
+    async loadUsers(context) {
+      const users = await Service.userService.get();
+      context.commit('loadUsers', users);
     },
-    deleteTask(context, id) {
+    async deleteTask(context, id) {
+      await Service.taskService.delete(id);
       context.commit('deleteTask', id);
     },
-    deleteUser(context, id) {
+    async deleteUser(context, id) {
+      await Service.userService.delete(id);
       context.commit('deleteUser', id);
     },
   },

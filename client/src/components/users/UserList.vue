@@ -20,7 +20,7 @@ export default {
     },
   },
   async created() {
-    this.$store.dispatch('loadUsers');
+    await this.$store.dispatch('loadUsers');
   },
 };
 </script>
