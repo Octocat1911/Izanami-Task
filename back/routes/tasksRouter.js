@@ -40,8 +40,13 @@ router.get('/task/:id',cors(),function (req,res,next) {
 router.post('/task',cors(),function (req,res,next) {
   let task = req.body;
   taskmanager.addTask(task,function (result) {
-    res.status(201);
-    res.send(result);
+    if(result.result.n === 1){
+      res.status(201);
+      res.send(result);
+    } else {
+      res.status(400);
+      res.send(result);
+    }
   });
 });
 
@@ -49,16 +54,26 @@ router.put('/task/:id',cors(),function (req,res,next) {
   let id = ObjectID(req.params.id);
   let task = req.body;
   taskmanager.modifyTask(id,task,function (result) {
-    res.status(201);
-    res.send(result);
+    if(result.result.n === 1){
+      res.status(200);
+      res.send(result);
+    } else {
+      res.status(400);
+      res.send(result);
+    }
   });
 });
 
 router.delete('/task/:id',cors(),function (req,res,next) {
   let id = new ObjectID(req.params.id);
    taskmanager.deleteTask(id,function (result) {
-     res.status(201);
-     res.send(result);
+     if(result.result.n === 1){
+       res.status(200);
+       res.send(result);
+     } else {
+       res.status(400);
+       res.send(result);
+     }
    });
 });
 

@@ -14,8 +14,6 @@
 </template>
 
 <script>
-import Service from '@/services/';
-
 export default {
   name: 'UserCreate',
   data: () => ({
@@ -26,7 +24,11 @@ export default {
   }),
   methods: {
     submit(user) {
-      Service.userService.add(user);
+      const newuser = {
+        firstname: user.firstname,
+        lastname: user.lastname,
+      };
+      this.$store.dispatch('addUser', newuser);
       this.user.firstname = '';
       this.user.lastname = '';
     },

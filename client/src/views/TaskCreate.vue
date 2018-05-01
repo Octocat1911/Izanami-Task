@@ -29,8 +29,6 @@
 </template>
 
 <script>
-import Service from '@/services';
-
 export default {
   name: 'TaskCreate',
   data: () => ({
@@ -44,10 +42,14 @@ export default {
   }),
   methods: {
     submit(task) {
-      const sbtask = task;
-      sbtask.dateBegin = sbtask.dateBegin.toDateString();
-      sbtask.dateEnd = sbtask.dateEnd.toDateString();
-      Service.taskService.add(sbtask);
+      const newtask = {
+        title: task.title,
+        dateBegin: task.dateBegin.toDateString(),
+        dateEnd: task.dateEnd.toDateString(),
+        status: task.status,
+        tags: task.tags,
+      };
+      this.$store.dispatch('addTask', newtask);
       const today = new Date();
       this.task.title = '';
       this.task.dateBegin = today;

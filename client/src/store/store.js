@@ -25,10 +25,18 @@ export default new Vuex.Store({
       state.users = users;
     },
     deleteTask(state, id) {
-      state.tasks.splice(state.tasks.findIndex(x => x.id === id), 1);
+      // eslint-disable-next-line
+      state.tasks.splice(state.tasks.findIndex(x => x._id === id), 1);
     },
     deleteUser(state, id) {
-      state.users.splice(state.users.findIndex(x => x.id === id), 1);
+      // eslint-disable-next-line
+      state.users.splice(state.users.findIndex(x => x._id === id), 1);
+    },
+    addTask(state, task) {
+      state.tasks.push(task);
+    },
+    addUser(state, user) {
+      state.users.push(user);
     },
   },
   actions: {
@@ -41,12 +49,28 @@ export default new Vuex.Store({
       context.commit('loadUsers', users);
     },
     async deleteTask(context, id) {
-      await Service.taskService.delete(id);
-      context.commit('deleteTask', id);
+      const res = await Service.taskService.delete(id);
+      if (res.status === 200) {
+        context.commit('deleteTask', id);
+      }
     },
     async deleteUser(context, id) {
-      await Service.userService.delete(id);
-      context.commit('deleteUser', id);
+      const res = await Service.userService.delete(id);
+      if (res.status === 200) {
+        context.commit('deleteUser', id);
+      }
+    },
+    async addTask(context, task) {
+      const res = await Service.taskService.add(task);
+      if (res.status === 201) {
+        context.commit('addTask', task);
+      }
+    },
+    async addUser(context, user) {
+      const res = await Service.userService.add(user);
+      if (res.status === 201) {
+        context.commit('addUser', user);
+      }
     },
   },
 });
