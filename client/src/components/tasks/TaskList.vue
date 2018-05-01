@@ -2,12 +2,11 @@
   <div class="task-list">
     <task-card v-for="task in tasks"
     :task="task"
-    :key="task.id" @deleted="deleteCard"></task-card>
+    :key="task.id"></task-card>
   </div>
 </template>
 
 <script>
-import Service from '@/services/';
 import TaskCard from './taskCard';
 
 export default {
@@ -15,18 +14,15 @@ export default {
   components: {
     TaskCard,
   },
-  data: () => ({
-    tasks: [],
-  }),
-  methods: {
-    deleteCard(id) {
-      Service.taskService.delete(id);
-      // eslint-disable-next-line
-      this.tasks.splice(this.tasks.findIndex(x => x._id === id), 1);
+  computed: {
+    tasks() {
+      return this.$store.state.tasks;
     },
   },
+  methods: {
+  },
   async created() {
-    this.tasks = await Service.taskService.get();
+    await this.$store.dispatch('loadTasks');
   },
 };
 </script>

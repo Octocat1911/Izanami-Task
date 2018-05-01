@@ -2,12 +2,11 @@
   <div>
     <user-card v-for="user in users"
     :user="user"
-    :key="user.id" @deleted="deleteUser"></user-card>
+    :key="user.id"></user-card>
   </div>
 </template>
 
 <script>
-import Service from '@/services/';
 import UserCard from './userCard';
 
 export default {
@@ -15,17 +14,13 @@ export default {
   components: {
     UserCard,
   },
-  data: () => ({
-    users: [],
-  }),
-  methods: {
-    deleteUser(id) {
-      Service.userService.delete(id);
-      this.users.splice(this.users.findIndex(x => x.id === id), 1);
+  computed: {
+    users() {
+      return this.$store.getters.getUsers;
     },
   },
   async created() {
-    this.users = await Service.userService.get();
+    this.$store.dispatch('loadUsers');
   },
 };
 </script>

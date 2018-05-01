@@ -23,23 +23,23 @@
     </div>
     <footer class="card-footer">
       <a class="card-footer-item">Edit</a>
-      <a class="card-footer-item" @click="$emit('deleted',task._id)">Delete</a>
+      <a class="card-footer-item" @click="deleteCard(task._id)">Delete</a>
     </footer>
   </div>
 </template>
 
 <script>
-import Service from '@/services';
-
 export default {
   name: 'TaskCard',
-  components: {
-    Service,
-  },
   props: {
     task: {
       type: Object,
       require: true,
+    },
+  },
+  methods: {
+    deleteCard(id) {
+      this.$store.dispatch('deleteTask', id);
     },
   },
 };

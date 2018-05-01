@@ -17,7 +17,7 @@
    <footer class="card-footer">
     <a href="#" class="card-footer-item">Save</a>
     <a href="#" class="card-footer-item">Edit</a>
-    <a class="card-footer-item" @click="$emit('deleted',user._id)">Delete</a>
+    <a class="card-footer-item" @click="deleteCard(user._id)">Delete</a>
     </footer>
 </div>
 </template>
@@ -29,6 +29,11 @@ export default {
     user: {
       type: Object,
       require: true,
+    },
+  },
+  methods: {
+    deleteCard(id) {
+      this.$store.dispatch('deleteUser', id);
     },
   },
 };
