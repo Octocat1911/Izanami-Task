@@ -1,5 +1,5 @@
 <template>
-  <div class="task-creation">
+  <div class="task-modify">
     <h1 class="title">Task creation </h1>
     <section class="form">
       <b-field label="Title">
@@ -30,39 +30,21 @@
 
 <script>
 export default {
-  name: 'TaskCreate',
-  data: () => ({
-    task: {
-      title: '',
-      dateBegin: new Date(),
-      dateEnd: new Date(),
-      status: '',
-      tags: [],
+  name: 'TaskModify',
+  computed: {
+    task() {
+      return this.$store.getters.getCurrentTask;
     },
-  }),
-  methods: {
-    submit(task) {
-      const newtask = {
-        title: task.title,
-        dateBegin: task.dateBegin,
-        dateEnd: task.dateEnd,
-        status: task.status,
-        tags: task.tags,
-      };
-      this.$store.dispatch('addTask', newtask);
-      const today = new Date();
-      this.task.title = '';
-      this.task.dateBegin = today;
-      this.task.dateEnd = today;
-      this.task.status = '';
-      this.task.tags = [];
-    },
+  },
+  beforeRouteLeave(to, from, next) {
+    this.$store.dispatch('setCurrentTask', {});
+    next();
   },
 };
 </script>
 
 <style lang="scss" scoped>
-  .task-creation{
+  .task-modify{
     .title{
       text-align: center;
       margin-top: 80px;

@@ -8,7 +8,7 @@ import 'vue-awesome/icons';
 import App from './App';
 import router from './router';
 import '../node_modules/normalize.css/normalize.css';
-import Store from './store/store';
+import Store from './store/';
 
 Vue.use(Buefy);
 Vue.config.productionTip = false;

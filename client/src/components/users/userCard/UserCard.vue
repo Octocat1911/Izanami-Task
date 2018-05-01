@@ -16,7 +16,7 @@
   </div>
    <footer class="card-footer">
     <a href="#" class="card-footer-item">Save</a>
-    <a href="#" class="card-footer-item">Edit</a>
+    <a href="#/usermodify" class="card-footer-item" @click="editUser(user)">Edit</a>
     <a class="card-footer-item" @click="deleteCard(user._id)">Delete</a>
     </footer>
 </div>
@@ -34,6 +34,9 @@ export default {
   methods: {
     deleteCard(id) {
       this.$store.dispatch('deleteUser', id);
+    },
+    editUser(user) {
+      this.$store.dispatch('setCurrentUser', user);
     },
   },
 };

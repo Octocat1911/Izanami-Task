@@ -8,6 +8,8 @@ export default new Vuex.Store({
   state: {
     tasks: [],
     users: [],
+    currentTask: {},
+    currentUser: {},
   },
   getters: {
     getTasks(state) {
@@ -15,6 +17,12 @@ export default new Vuex.Store({
     },
     getUsers(state) {
       return state.users;
+    },
+    getCurrentTask(state) {
+      return state.currentTask;
+    },
+    getCurrentUser(state) {
+      return state.currentUser;
     },
   },
   mutations: {
@@ -37,6 +45,12 @@ export default new Vuex.Store({
     },
     addUser(state, user) {
       state.users.push(user);
+    },
+    setCurrentTask(state, task) {
+      state.currentTask = task;
+    },
+    setCurrentUser(state, user) {
+      state.currentUser = user;
     },
   },
   actions: {
@@ -71,6 +85,12 @@ export default new Vuex.Store({
       if (res.status === 201) {
         context.commit('addUser', user);
       }
+    },
+    setCurrentTask(context, task) {
+      context.commit('setCurrentTask', task);
+    },
+    setCurrentUser(context, user) {
+      context.commit('setCurrentUser', user);
     },
   },
 });

@@ -12,9 +12,9 @@
     </header>
     <div class="card-content">
       <div class="content">
-        <time datetime="2016-1-1">Begin : {{task.dateBegin}}</time>
+        <time>Begin : {{task.dateBegin}}</time>
         <br>
-        <time datetime="2016-1-1">End : {{task.dateEnd}}</time>
+        <time>End : {{task.dateEnd}}</time>
         <br>
         <a href="#" v-for="tag in task.tags"
         :tag="tag"
@@ -22,7 +22,7 @@
       </div>
     </div>
     <footer class="card-footer">
-      <a class="card-footer-item">Edit</a>
+      <a href="#/taskmodify" class="card-footer-item" @click="editTask(task)">Edit</a>
       <a class="card-footer-item" @click="deleteCard(task._id)">Delete</a>
     </footer>
   </div>
@@ -40,6 +40,9 @@ export default {
   methods: {
     deleteCard(id) {
       this.$store.dispatch('deleteTask', id);
+    },
+    editTask(task) {
+      this.$store.dispatch('setCurrentTask', task);
     },
   },
 };
