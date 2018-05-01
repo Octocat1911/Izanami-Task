@@ -36,7 +36,7 @@ export default {
       this.$store.dispatch('deleteUser', id);
     },
     editUser(user) {
-      this.$store.dispatch('setCurrentUser', user);
+      this.$store.commit('setCurrentUser', user);
     },
   },
 };

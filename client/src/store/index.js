@@ -5,6 +5,7 @@ import Service from '@/services/';
 Vue.use(Vuex);
 
 export default new Vuex.Store({
+  strict: true,
   state: {
     tasks: [],
     users: [],
@@ -85,12 +86,6 @@ export default new Vuex.Store({
       if (res.status === 201) {
         context.commit('addUser', user);
       }
-    },
-    setCurrentTask(context, task) {
-      context.commit('setCurrentTask', task);
-    },
-    setCurrentUser(context, user) {
-      context.commit('setCurrentUser', user);
     },
   },
 });

@@ -22,7 +22,7 @@ export default {
     },
   },
   beforeRouteLeave(to, from, next) {
-    this.$store.dispatch('setCurrentUser', {});
+    this.$store.commit('setCurrentUser', {});
     next();
   },
 };

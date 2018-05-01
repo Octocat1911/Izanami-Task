@@ -1,11 +1,13 @@
 <template>
   <div>
-    <Navbar v-on:openSide="setVisible()" class="navbar"></Navbar>
+    <Navbar @openSide="setVisible()" class="navbar"></Navbar>
     <transition name="slide">
-    <Sidebar v-on:closeSide="setVisible()" class="sidebar" v-if="visible"></Sidebar>
+    <Sidebar @closeSide="setVisible()" class="sidebar" v-if="visible"></Sidebar>
     </transition>
-    <slot name="content">
-    </slot>
+    <div @closeSide="setVisible()">
+      <slot name="content">
+      </slot>
+    </div>
   </div>
 </template>
 
