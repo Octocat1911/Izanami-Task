@@ -14,9 +14,8 @@ router.use(cors());
 router.get('/task',cors(), function(req, res, next) {
   taskmanager.getAllTask(function (result) {
     res.contentType('application/json; charset=utf-8');
-    if(result.length === 0 || result === undefined){
-      result = 'Oops sorry it might be empty then ;) !';
-      res.contentType('text/html');
+    if(result.length === 0){
+      res.status(404);
     }
     res.send(result);
   });
@@ -27,15 +26,12 @@ router.get('/task/:id',cors(),function (req,res,next) {
   try {
     id = new ObjectID(req.params.id);
   }catch (e) {
-    res.contentType('text/html');
-    res.send('Oops nothing here ! :(');
     return e;
   }
   taskmanager.getTaskById(id,function (result) {
     res.contentType('application/json; charset=utf-8');
-    if(result.length === 0 || result === undefined){
-      result = 'Oops nothing here ! :(';
-      res.contentType('text/html');
+    if(result.length === 0){
+      res.status(404);
     }
     res.send(result);
   });
