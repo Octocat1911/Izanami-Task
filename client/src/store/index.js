@@ -47,6 +47,26 @@ export default new Vuex.Store({
     addUser(state, user) {
       state.users.push(user);
     },
+    modifyUser(state, modifiedUser) {
+      const { users } = state;
+      state.users = users.reduce((reducedUsers, user) => {
+        const { _id } = user;
+        // eslint-disable-next-line
+        if (_id === modifiedUser._id) reducedUsers.push(modifiedUser);
+        else reducedUsers.push(user);
+        return reducedUsers;
+      }, []);
+    },
+    modifyTask(state, modifiedTask) {
+      const { tasks } = state;
+      state.tasks = tasks.reduce((reducedTasks, task) => {
+        const { _id } = task;
+        // eslint-disable-next-line
+        if (_id === modifiedTask._id) reducedTasks.push(modifiedTask);
+        else reducedTasks.push(task);
+        return reducedTasks;
+      }, []);
+    },
     setCurrentTask(state, task) {
       state.currentTask = task;
     },
@@ -86,6 +106,16 @@ export default new Vuex.Store({
       if (res.status === 201) {
         context.commit('addUser', user);
       }
+    },
+    async modifyUser(context, payload) {
+      const { id, user } = payload;
+      const modifiedUser = await Service.userService.update(id, user);
+      context.commit('modifyUser', modifiedUser);
+    },
+    async modifyTask(context, payload) {
+      const { id, task } = payload;
+      const modifiedTask = await Service.taskService.update(id, task);
+      context.commit('modifyTask', modifiedTask);
     },
   },
 });

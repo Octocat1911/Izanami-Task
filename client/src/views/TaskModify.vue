@@ -1,29 +1,31 @@
 <template>
   <div class="task-modify">
-    <h1 class="title">Task creation </h1>
+    <h1 class="title">Task modify</h1>
     <section class="form">
       <b-field label="Title">
-        <b-input v-model="task.title" placeholder="Enter a title"></b-input>
+        <b-input v-model="cacheTask.title" :placeholder="task.title"></b-input>
       </b-field>
       <b-field label="Begin date">
         <b-datepicker
-          v-model="task.dateBegin"
-          placeholder="Click to select...">
+          v-model="cacheTask.dateBegin"
+          :placeholder="task.dateBegin">
         </b-datepicker>
       </b-field>
       <b-field label="Ending date">
         <b-datepicker
-          v-model="task.dateEnd"
-          placeholder="Click to select...">
+          v-model="cacheTask.dateEnd"
+          :placeholder="task.dateEnd">
         </b-datepicker>
       </b-field>
        <b-field label="Add some tags">
           <b-taginput
-            v-model="task.tags"
-            placeholder="Add a tag">
+            v-model="cacheTask.tags"
+            :placeholder="task.tags">
           </b-taginput>
         </b-field>
-      <button class="button is-success" @click="submit(task)">Submit</button>
+        <a href="#/task">
+          <button class="button is-success" @click="modifyTask(cacheTask)">Submit</button>
+        </a>
     </section>
   </div>
 </template>
@@ -31,13 +33,41 @@
 <script>
 export default {
   name: 'TaskModify',
-  computed: {
-    task() {
-      return this.$store.getters.getCurrentTask;
+  data: () => ({
+    cacheTask: {
+      title: '',
+      dateBegin: new Date(),
+      dateEnd: new Date(),
+      status: '',
+      tags: [],
+      users: [],
+    },
+  }),
+  props: {
+    users: {
+      type: Array,
+      require: true,
     },
   },
+  methods: {
+    modifyTask(newTask) {
+      const modifiedTask = newTask;
+      modifiedTask.dateBegin = newTask.dateBegin.toDateString();
+      modifiedTask.dateEnd = newTask.dateEnd.toDateString();
+      modifiedTask.users = this.task.users;
+      const payload = {
+        // eslint-disable-next-line
+        id: this.task._id,
+        task: modifiedTask,
+      };
+      this.$store.dispatch('modifyTask', payload);
+    },
+  },
+  created() {
+    this.task = this.$store.getters.getCurrentTask;
+  },
   beforeRouteLeave(to, from, next) {
-    this.$store.dispatch('setCurrentTask', {});
+    this.$store.commit('setCurrentTask', {});
     next();
   },
 };

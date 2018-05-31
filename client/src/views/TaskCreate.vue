@@ -17,6 +17,12 @@
           placeholder="Click to select...">
         </b-datepicker>
       </b-field>
+      <b-field label="Set the status">
+        <b-select v-model="task.status">
+            <option value="progress">In Progress</option>
+            <option value="done">Done</option>
+        </b-select>
+      </b-field>
        <b-field label="Add some tags">
           <b-taginput
             v-model="task.tags"
@@ -44,8 +50,8 @@ export default {
     submit(task) {
       const newtask = {
         title: task.title,
-        dateBegin: task.dateBegin,
-        dateEnd: task.dateEnd,
+        dateBegin: task.dateBegin.toDateString(),
+        dateEnd: task.dateEnd.toDateString(),
         status: task.status,
         tags: task.tags,
       };

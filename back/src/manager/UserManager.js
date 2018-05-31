@@ -55,7 +55,7 @@ class UserManager{
       dbManager.getDbConnection(function (err, client) {
         if(err) throw err;
         const db = client.db('nodejs');
-        db.collection('users').updateOne({"_id": id},{$set: user},function (err, result) {
+        db.collection('users').findOneAndUpdate({"_id": id},{$set: user},{returnOriginal: false},function (err, result) {
           if(err) throw err;
           callback(result);
           client.close();

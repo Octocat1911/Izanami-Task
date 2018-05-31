@@ -23,7 +23,7 @@ export default class {
   }
 
   async update(id, resource) {
-    const res = fetch(`${this.apiUrl}${this.endpoint}/${id}`, {
+    const res = await fetch(`${this.apiUrl}${this.endpoint}/${id}`, {
       method: 'put',
       headers: {
         'Content-Type': 'application/json',

@@ -19,6 +19,8 @@
         <a href="#" v-for="tag in task.tags"
         :tag="tag"
         :key="tag">#{{tag}} </a>
+        <a href="#" v-for="user in cardUsers"
+        :key="user.id"> @{{ user[0].firstname }} </a>
       </div>
     </div>
     <footer class="card-footer">
@@ -29,6 +31,8 @@
 </template>
 
 <script>
+import Service from '@/services/';
+
 export default {
   name: 'TaskCard',
   props: {
@@ -37,6 +41,9 @@ export default {
       require: true,
     },
   },
+  data: () => ({
+    cardUsers: [],
+  }),
   methods: {
     deleteCard(id) {
       this.$store.dispatch('deleteTask', id);
@@ -44,6 +51,11 @@ export default {
     editTask(task) {
       this.$store.commit('setCurrentTask', task);
     },
+  },
+  async created() {
+    this.task.users.forEach(async (user) => {
+      this.cardUsers.push(await Service.userService.get(user));
+    });
   },
 };
 </script>

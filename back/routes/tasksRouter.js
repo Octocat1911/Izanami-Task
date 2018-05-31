@@ -26,6 +26,7 @@ router.get('/task/:id',cors(),function (req,res,next) {
   try {
     id = new ObjectID(req.params.id);
   }catch (e) {
+    res.sendStatus(404);
     return e;
   }
   taskmanager.getTaskById(id,function (result) {
@@ -37,44 +38,111 @@ router.get('/task/:id',cors(),function (req,res,next) {
   });
 });
 
+router.get('/task/:id/user',cors(),function (req,res,next) {
+  let id = 0;
+  try {
+    id = ObjectID(req.params.id);
+  } catch (e) {
+    res.sendStatus(404);
+    return e;
+  }
+  taskmanager.getTaskUsers(id,function (result) {
+    res.contentType('application/json; charset=utf-8');
+    if(result.length === 0){
+      res.sendStatus(404);
+    } else {
+      res.send(result);
+    }
+  })
+});
+
 router.post('/task',cors(),function (req,res,next) {
-  let task = req.body;
+  let task = new Task(req.body.title,req.body.dateBegin,req.body.dateEnd,req.body.status,req.body.tags);
   taskmanager.addTask(task,function (result) {
     if(result.result.n === 1){
       res.status(201);
       res.send(result);
     } else {
-      res.status(400);
+      res.status(202);
       res.send(result);
     }
   });
 });
 
 router.put('/task/:id',cors(),function (req,res,next) {
-  let id = ObjectID(req.params.id);
+  let id = 0;
+  try {
+    id = ObjectID(req.params.id);
+  } catch (e) {
+    res.sendStatus(400);
+    return e;
+  }
   let task = req.body;
   taskmanager.modifyTask(id,task,function (result) {
-    if(result.result.n === 1){
       res.status(200);
+      res.send(result.value);
+  });
+});
+
+router.put('/task/:id/user/:userid',cors(),function (req, res, next) {
+  let id = 0;
+  let userid = 0;
+  try {
+    id = ObjectID(req.params.id);
+    userid = ObjectID(req.params.userid);
+  } catch (e) {
+    res.sendStatus(400);
+    return e;
+  }
+  taskmanager.addTaskUser(id,userid,function (result) {
+    if(result.result.n === 1) {
+      res.status(201);
       res.send(result);
     } else {
-      res.status(400);
+      res.status(202);
       res.send(result);
     }
   });
 });
 
 router.delete('/task/:id',cors(),function (req,res,next) {
-  let id = new ObjectID(req.params.id);
+  let id = 0;
+  try {
+    id = new ObjectID(req.params.id);
+  } catch (e) {
+    res.sendStatus(400);
+    return e;
+  }
    taskmanager.deleteTask(id,function (result) {
      if(result.result.n === 1){
        res.status(200);
        res.send(result);
      } else {
-       res.status(400);
+       res.status(202);
        res.send(result);
      }
    });
+});
+
+router.delete('/task/:id/user/:userid',cors(),function (req, res, next) {
+  let id = 0;
+  let userid = 0;
+  try {
+    id = ObjectID(req.params.id);
+    userid = ObjectID(req.params.userid);
+  } catch (e) {
+    res.sendStatus(400);
+    return e;
+  }
+  taskmanager.deleteTaskUser(id,userid,function (result) {
+    if(result.result.n === 1){
+      res.status(200);
+      res.send(result);
+    } else {
+      res.status(202);
+      res.send(result);
+    }
+  });
 });
 
 module.exports = router;

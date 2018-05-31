@@ -34,6 +34,38 @@ class TaskManager{
     }
   }
 
+  getTaskUsers(id,callback){
+    try {
+      dbManager.getDbConnection(function (err, client) {
+        if(err) throw err;
+        const db = client.db('nodejs');
+        db.collection('tasks').find({"_id": id}, {projection :{'users': 1, '_id':0}}).toArray(function (err, result) {
+          if(err) throw err;
+          callback(result);
+          client.close();
+        });
+      });
+    }catch (e) {
+      return e;
+    }
+  }
+
+  addTaskUser(id,userid,callback){
+    try {
+      dbManager.getDbConnection(function (err, client) {
+        if(err) throw err;
+        const db = client.db('nodejs');
+        db.collection('tasks').updateOne({"_id":id}, { $addToSet: {"users": userid}},function (err, result) {
+          if (err) throw err;
+          callback(result);
+          client.close();
+        });
+      });
+    }catch (e) {
+      return e;
+    }
+  }
+
   addTask(task,callback){
     try{
       dbManager.getDbConnection(function (err, client) {
@@ -55,7 +87,7 @@ class TaskManager{
       dbManager.getDbConnection(function (err, client) {
         if(err) throw err;
         const db = client.db('nodejs');
-        db.collection('tasks').updateOne({"_id": id},{$set: task},function (err, result) {
+        db.collection('tasks').findOneAndUpdate({"_id": id},{$set: task},{returnOriginal: false},function (err, result) {
           if(err) throw err;
           callback(result);
           client.close();
@@ -78,6 +110,22 @@ class TaskManager{
         });
       });
     }catch (e) {
+      return e;
+    }
+  }
+
+  deleteTaskUser(id,userid,callback){
+    try {
+      dbManager.getDbConnection(function (err, client) {
+        if (err) throw err;
+        const db = client.db('nodejs');
+        db.collection('tasks').updateOne({"_id":id}, { $pull: {"users": userid}}, function (err, result) {
+          if(err) throw err;
+          callback(result);
+          client.close();
+        });
+      });
+    } catch (e) {
       return e;
     }
   }

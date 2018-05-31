@@ -4,10 +4,8 @@
     <transition name="slide">
     <Sidebar @closeSide="setVisible()" class="sidebar" v-if="visible"></Sidebar>
     </transition>
-    <div @closeSide="setVisible()">
-      <slot name="content">
-      </slot>
-    </div>
+    <slot name="content">
+    </slot>
   </div>
 </template>
 
@@ -36,7 +34,7 @@ export default {
 <style lang="scss" scoped>
   .slide-leave-active,
   .slide-enter-active {
-    transition: 1s;
+    transition: 0.5s;
   }
   .slide-enter {
     transform: translate(-100%, 0);

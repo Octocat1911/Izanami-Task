@@ -3,12 +3,18 @@
     <h1 class="title">Edit user</h1>
     <section class="form">
         <b-field label="Firstname">
-            <b-input v-model="user.firstname" placeholder="Enter your firstname"></b-input>
+            <b-input v-model="cacheUser.firstname" :placeholder="user.firstname" required></b-input>
         </b-field>
         <b-field label="Lastname">
-            <b-input v-model="user.lastname" placeholder="Enter your lastname"></b-input>
+            <b-input v-model="cacheUser.lastname" :placeholder="user.lastname" required></b-input>
         </b-field>
-        <button class="button is-success" @click="submit(user)">Submit</button>
+         <b-field label="Description">
+            <b-input v-model="cacheUser.description" minlength="25" maxlength="40"
+            type="textarea" :placeholder="user.description" required></b-input>
+        </b-field>
+        <a href="#/user">
+          <button class="button is-success" @click="modifyUser(cacheUser)">Submit</button>
+        </a>
     </section>
   </div>
 </template>
@@ -16,9 +22,26 @@
 <script>
 export default {
   name: 'UserModify',
+  data: () => ({
+    cacheUser: {
+      firstname: '',
+      lastname: '',
+      description: '',
+    },
+  }),
   computed: {
     user() {
       return this.$store.getters.getCurrentUser;
+    },
+  },
+  methods: {
+    modifyUser(newUser) {
+      const payload = {
+        // eslint-disable-next-line
+        id: this.user._id,
+        user: newUser,
+      };
+      this.$store.dispatch('modifyUser', payload);
     },
   },
   beforeRouteLeave(to, from, next) {

@@ -1,9 +1,9 @@
 class User {
 
-  constructor(firstname,lastname){
+  constructor(firstname,lastname,description){
     this.firstname = firstname;
     this.lastname = lastname;
-    this.tasks = [ "" ];
+    this.description = description;
   }
 
 }

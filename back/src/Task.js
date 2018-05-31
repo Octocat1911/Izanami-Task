@@ -6,6 +6,7 @@ class Task {
         this.dateEnd = dateEnd;
         this.status = status;
         this.tags = tags;
+        this.users = [];
     }
 
 }

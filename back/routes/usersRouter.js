@@ -31,7 +31,7 @@ router.get('/user/:id',cors(),function (req, res) {
 });
 
 router.post('/user',cors(),function (req, res) {
-  usermanager.addUser(new User(req.body.firstname,req.body.lastname),function (result) {
+  usermanager.addUser(new User(req.body.firstname,req.body.lastname,req.body.description),function (result) {
     if(result.result.n === 1){
       res.status(201);
       res.send(result);
@@ -46,13 +46,8 @@ router.put('/user/:id',cors(),function (req, res) {
   let id = ObjectID(req.params.id);
   let user = req.body;
   usermanager.modifyUser(id,user, function (result) {
-    if(result.result.n === 1){
       res.status(200);
-      res.send(result);
-    } else {
-      res.status(400);
-      res.send(result);
-    }
+      res.send(result.value);
   });
 });
 

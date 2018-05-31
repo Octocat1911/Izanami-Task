@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "dev": "watch 'npm start' ../myapp",
+    "dev": "watch 'npm start' ../back",
     "start": "node ./bin/www"
   },
   "dependencies": {
