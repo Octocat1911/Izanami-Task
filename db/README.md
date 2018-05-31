@@ -8,7 +8,7 @@
 
 ``` bash
 # Launch database
-docker-compose up
+docker-compose up -d
 
 # Close database
 docker-compose down
